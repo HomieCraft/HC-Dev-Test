@@ -1,130 +1,228 @@
-document.addEventListener("DOMContentLoaded",function(){
+document.addEventListener("DOMContentLoaded", function () {
 
-// BURGER MENU
-window.toggleMenu=function(){
-document.getElementById("sidebar").classList.toggle("active");
-document.getElementById("overlay").classList.toggle("active");
+/* ---------------- */
+/* BURGER MENU */
+/* ---------------- */
+
+window.toggleMenu = function () {
+const sidebar = document.getElementById("sidebar");
+const overlay = document.getElementById("overlay");
+
+if (sidebar) sidebar.classList.toggle("active");
+if (overlay) overlay.classList.toggle("active");
 };
 
-// COPY IP
-window.copyIP=function(){
+
+/* ---------------- */
+/* COPY IP */
+/* ---------------- */
+
+window.copyIP = function () {
+
 navigator.clipboard.writeText("homiecraft-smp.aternos.me");
-const btn=document.querySelector(".btn-primary");
-btn.innerText="✔ Kopiert";
-setTimeout(()=>{btn.innerText="IP kopieren";},2000);
+
+const btn = document.querySelector(".btn-primary");
+
+if (btn) {
+btn.innerText = "✔ Kopiert";
+
+setTimeout(() => {
+btn.innerText = "IP kopieren";
+}, 2000);
+}
+
 };
 
-// SCROLL TOP
-const scrollBtn=document.getElementById("scrollTop");
 
-window.onscroll=function(){
+/* ---------------- */
+/* SCROLL TOP */
+/* ---------------- */
 
-if(scrollBtn){
-if(document.documentElement.scrollTop>400){
-scrollBtn.style.display="block";
-}else{
-scrollBtn.style.display="none";
+const scrollBtn = document.getElementById("scrollTop");
+
+window.onscroll = function () {
+
+if (scrollBtn) {
+
+if (document.documentElement.scrollTop > 400) {
+scrollBtn.style.display = "block";
+} else {
+scrollBtn.style.display = "none";
 }
+
 }
 
 fadeInSections();
 
 };
 
-window.scrollToTop=function(){
-window.scrollTo({top:0,behavior:"smooth"});
+window.scrollToTop = function () {
+window.scrollTo({
+top: 0,
+behavior: "smooth"
+});
 };
 
-// ACCORDION
-document.querySelectorAll(".accordion-header").forEach(header=>{
-header.addEventListener("click",()=>{
-const content=header.nextElementSibling;
-content.style.maxHeight=content.style.maxHeight?null:content.scrollHeight+"px";
-});
+
+/* ---------------- */
+/* ACCORDION */
+/* ---------------- */
+
+document.querySelectorAll(".accordion-header").forEach(header => {
+
+header.addEventListener("click", () => {
+
+const content = header.nextElementSibling;
+
+content.style.maxHeight =
+content.style.maxHeight
+? null
+: content.scrollHeight + "px";
+
 });
 
-// SERVER API
-function loadServerStatus(){
+});
+
+
+/* ---------------- */
+/* SERVER STATUS API */
+/* ---------------- */
+
+function loadServerStatus() {
 
 fetch("https://api.mcsrvstat.us/2/homiecraft-smp.aternos.me")
 
-.then(res=>res.json())
+.then(res => res.json())
 
-.then(data=>{
+.then(data => {
 
-const statusEl=document.getElementById("server-status");
-const statusCard=document.getElementById("status-card");
-const playersCard=document.getElementById("players-card");
+const statusEl = document.getElementById("server-status");
+const statusCard = document.getElementById("status-card");
+const playersCard = document.getElementById("players-card");
 
-if(!data)return;
+const statusDot = document.getElementById("status-dot");
+const playerCount = document.getElementById("player-count");
 
-if(data.online){
+if (!data) return;
 
-const online=data.players?.online ?? 0;
-const max=data.players?.max ?? 30;
+if (data.online) {
 
-if(statusEl)statusEl.innerHTML=`🟢 Online – ${online}/${max}`;
-if(statusCard)statusCard.innerHTML="Status: 🟢 Online";
-if(playersCard)playersCard.innerHTML=`Spieler: ${online}/${max}`;
+const online = data.players?.online ?? 0;
+const max = data.players?.max ?? 30;
 
-}else{
+if (statusEl) statusEl.innerHTML = "Online";
 
-if(statusEl)statusEl.innerHTML="🔴 Offline";
-if(statusCard)statusCard.innerHTML="Status: 🔴 Offline";
-if(playersCard)playersCard.innerHTML="Spieler: 0/30";
+if (statusDot) {
+statusDot.style.background = "#22c55e";
+statusDot.style.boxShadow = "0 0 10px #22c55e";
+}
+
+if (statusCard) statusCard.innerHTML = "Status: 🟢 Online";
+if (playersCard) playersCard.innerHTML = `Spieler: ${online}/${max}`;
+
+if (playerCount) animateCounter(playerCount, online);
+
+} else {
+
+if (statusEl) statusEl.innerHTML = "Offline";
+
+if (statusDot) {
+statusDot.style.background = "#ef4444";
+statusDot.style.boxShadow = "0 0 10px #ef4444";
+}
+
+if (statusCard) statusCard.innerHTML = "Status: 🔴 Offline";
+if (playersCard) playersCard.innerHTML = "Spieler: 0/30";
+
+if (playerCount) animateCounter(playerCount, 0);
 
 }
 
 })
 
-.catch(()=>{
-const statusEl=document.getElementById("server-status");
-if(statusEl)statusEl.innerHTML="⚠ API Fehler";
+.catch(() => {
+
+const statusEl = document.getElementById("server-status");
+
+if (statusEl) {
+statusEl.innerHTML = "⚠ API Fehler";
+}
+
 });
 
 }
 
 loadServerStatus();
-setInterval(loadServerStatus,60000);
+setInterval(loadServerStatus, 60000);
 
 
-// TEAM SYSTEM
-const teamMembers=[
+/* ---------------- */
+/* PLAYER COUNTER */
+/* ---------------- */
 
-{name:"LucaMaximal",rank:"owner"},
-{name:"Eierfratze0815",rank:"owner"},
-{name:"LucaMaximal",rank:"developer"},
-{name:"? Unbekannt",rank:"mod"},
-{name:"? Unbekannt",rank:"support"},
-{name:"? GESUCHT! GESUCHT!",rank:"builder"},
-{name:"? GESUCHT! GESUCHT!",rank:"creator"},
-{name:"? Unbekannt",rank:"homie"}
+function animateCounter(el, target) {
+
+let current = 0;
+
+const step = () => {
+
+current += Math.ceil(target / 20);
+
+if (current >= target) current = target;
+
+el.textContent = current;
+
+if (current < target) {
+requestAnimationFrame(step);
+}
+
+};
+
+step();
+
+}
+
+
+/* ---------------- */
+/* TEAM SYSTEM */
+/* ---------------- */
+
+const teamMembers = [
+
+{ name: "LucaMaximal", rank: "owner" },
+{ name: "Eierfratze0815", rank: "owner" },
+{ name: "LucaMaximal", rank: "developer" },
+{ name: "? Unbekannt", rank: "mod" },
+{ name: "? Unbekannt", rank: "support" },
+{ name: "? GESUCHT! GESUCHT!", rank: "builder" },
+{ name: "? GESUCHT! GESUCHT!", rank: "creator" },
+{ name: "? Unbekannt", rank: "homie" }
 
 ];
 
-const teamContainer=document.getElementById("team-container");
+const teamContainer = document.getElementById("team-container");
 
-if(teamContainer){
+if (teamContainer) {
 
-teamMembers.forEach(member=>{
+teamMembers.forEach(member => {
 
-const card=document.createElement("div");
+const card = document.createElement("div");
 card.classList.add("card");
 
-card.innerHTML=`
+card.innerHTML = `
 <img src="https://mc-heads.net/avatar/${member.name}" style="width:80px;border-radius:8px;margin-bottom:10px;">
 <h3>${member.name}</h3>
 <p class="rank-${member.rank}">${member.rank.toUpperCase()}</p>
 `;
 
-card.addEventListener("mouseover",()=>{
-card.style.transform="translateY(-7px)";
-card.style.boxShadow=`0 0 15px var(--${member.rank})`;
+card.addEventListener("mouseover", () => {
+card.style.transform = "translateY(-7px)";
+card.style.boxShadow = `0 0 15px var(--${member.rank})`;
 });
 
-card.addEventListener("mouseout",()=>{
-card.style.transform="translateY(0)";
-card.style.boxShadow="";
+card.addEventListener("mouseout", () => {
+card.style.transform = "translateY(0)";
+card.style.boxShadow = "";
 });
 
 teamContainer.appendChild(card);
@@ -134,16 +232,19 @@ teamContainer.appendChild(card);
 }
 
 
-// FADE IN
-function fadeInSections(){
+/* ---------------- */
+/* FADE IN SECTIONS */
+/* ---------------- */
 
-document.querySelectorAll(".section,.hero").forEach(el=>{
+function fadeInSections() {
 
-const top=el.getBoundingClientRect().top;
+document.querySelectorAll(".section,.hero").forEach(el => {
 
-if(top<window.innerHeight-100){
-el.style.opacity=1;
-el.style.transform="translateY(0)";
+const top = el.getBoundingClientRect().top;
+
+if (top < window.innerHeight - 100) {
+el.style.opacity = 1;
+el.style.transform = "translateY(0)";
 }
 
 });
@@ -151,49 +252,55 @@ el.style.transform="translateY(0)";
 }
 
 
-// PARTICLES
-const canvas=document.getElementById("particles");
+/* ---------------- */
+/* PARTICLES */
+/* ---------------- */
 
-if(canvas){
+const canvas = document.getElementById("particles");
 
-const ctx=canvas.getContext("2d");
+if (canvas) {
 
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
+const ctx = canvas.getContext("2d");
 
-let particles=[];
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-for(let i=0;i<90;i++){
+let particles = [];
+
+for (let i = 0; i < 90; i++) {
 
 particles.push({
 
-x:Math.random()*canvas.width,
-y:Math.random()*canvas.height,
-r:Math.random()*2+1,
-dx:(Math.random()-0.5)*0.3,
-dy:(Math.random()-0.5)*0.3,
-color:Math.random()>0.5?"#00e5ff":"#a855f7"
+x: Math.random() * canvas.width,
+y: Math.random() * canvas.height,
+
+r: Math.random() * 2 + 1,
+
+dx: (Math.random() - 0.5) * 0.3,
+dy: (Math.random() - 0.5) * 0.3,
+
+color: Math.random() > 0.5 ? "#00e5ff" : "#a855f7"
 
 });
 
 }
 
-function animateParticles(){
+function animateParticles() {
 
-ctx.clearRect(0,0,canvas.width,canvas.height);
+ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-particles.forEach(p=>{
+particles.forEach(p => {
 
 ctx.beginPath();
-ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-ctx.fillStyle=p.color;
+ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+ctx.fillStyle = p.color;
 ctx.fill();
 
-p.x+=p.dx;
-p.y+=p.dy;
+p.x += p.dx;
+p.y += p.dy;
 
-if(p.x<0||p.x>canvas.width)p.dx*=-1;
-if(p.y<0||p.y>canvas.height)p.dy*=-1;
+if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
 
 });
 
@@ -203,39 +310,54 @@ requestAnimationFrame(animateParticles);
 
 animateParticles();
 
-window.addEventListener("resize",()=>{
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
+window.addEventListener("resize", () => {
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
 });
 
 }
 
 
-// SIDEBAR LINK CLOSE
-document.querySelectorAll("#sidebar a").forEach(link=>{
-link.addEventListener("click",()=>{
-document.getElementById("sidebar").classList.remove("active");
-document.getElementById("overlay").classList.remove("active");
+/* ---------------- */
+/* SIDEBAR CLOSE */
+/* ---------------- */
+
+document.querySelectorAll("#sidebar a").forEach(link => {
+
+link.addEventListener("click", () => {
+
+const sidebar = document.getElementById("sidebar");
+const overlay = document.getElementById("overlay");
+
+if (sidebar) sidebar.classList.remove("active");
+if (overlay) overlay.classList.remove("active");
+
 });
+
 });
 
 
-// SCREENSHOT LIGHTBOX
-const images=document.querySelectorAll(".screenshots img");
+/* ---------------- */
+/* SCREENSHOT LIGHTBOX */
+/* ---------------- */
 
-images.forEach(img=>{
+const images = document.querySelectorAll(".screenshots img");
 
-img.addEventListener("click",()=>{
+images.forEach(img => {
 
-const overlay=document.createElement("div");
+img.addEventListener("click", () => {
+
+const overlay = document.createElement("div");
 overlay.classList.add("image-lightbox");
 
-const big=document.createElement("img");
-big.src=img.src;
+const big = document.createElement("img");
+big.src = img.src;
 
 overlay.appendChild(big);
 
-overlay.addEventListener("click",()=>{
+overlay.addEventListener("click", () => {
 overlay.remove();
 });
 
@@ -247,10 +369,20 @@ document.body.appendChild(overlay);
 
 });
 
-window.addEventListener("load",()=>{
-document.querySelectorAll(".hero-title,.subtitle,.hero-buttons")
-.forEach(el=>{
-el.style.opacity=1;
-el.style.transform="translateY(0)";
+
+/* ---------------- */
+/* HERO LOAD ANIMATION */
+/* ---------------- */
+
+window.addEventListener("load", () => {
+
+document
+.querySelectorAll(".hero-title,.subtitle,.hero-buttons")
+.forEach(el => {
+
+el.style.opacity = 1;
+el.style.transform = "translateY(0)";
+
 });
+
 });
