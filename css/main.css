@@ -394,3 +394,72 @@ background-position:0% 50%;
 }
 
 }
+/* ---------------- */
+/* FULL GLASS MODE */
+/* ---------------- */
+
+body.glass-mode{
+
+background:
+linear-gradient(180deg,#0f1117,#08090d);
+
+}
+
+/* GLASS CARDS */
+
+body.glass-mode .card{
+
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(20px);
+border:1px solid rgba(255,255,255,0.08);
+
+box-shadow:
+0 8px 32px rgba(0,0,0,0.4);
+
+}
+
+/* GLASS NAVBAR */
+
+body.glass-mode header{
+
+background:rgba(20,22,30,0.45);
+backdrop-filter:blur(20px);
+border-bottom:1px solid rgba(255,255,255,0.06);
+
+}
+
+/* GLASS SIDEBAR */
+
+body.glass-mode #sidebar{
+
+background:rgba(15,17,23,0.6);
+backdrop-filter:blur(22px);
+
+}
+
+/* GLASS HERO BOX */
+
+body.glass-mode .server-box{
+
+background:rgba(255,255,255,0.06);
+backdrop-filter:blur(24px);
+
+border:1px solid rgba(255,255,255,0.08);
+
+}
+
+/* GLASS BUTTONS */
+
+body.glass-mode .btn-primary{
+
+background:rgba(0,229,255,0.2);
+border:1px solid rgba(0,229,255,0.4);
+
+}
+
+body.glass-mode .btn-secondary{
+
+background:rgba(168,85,247,0.2);
+border:1px solid rgba(168,85,247,0.4);
+
+}
