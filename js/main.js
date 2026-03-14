@@ -386,3 +386,36 @@ el.style.transform = "translateY(0)";
 });
 
 });
+/* ---------------- */
+/* IP TYPE ANIMATION */
+/* ---------------- */
+
+function animateIP(){
+
+const el=document.querySelector(".server-ip");
+
+if(!el)return;
+
+const text="homiecraft-smp.aternos.me";
+let i=0;
+
+el.textContent="";
+
+function type(){
+
+if(i<text.length){
+
+el.textContent+=text.charAt(i);
+i++;
+
+setTimeout(type,40);
+
+}
+
+}
+
+type();
+
+}
+
+window.addEventListener("load",animateIP);
