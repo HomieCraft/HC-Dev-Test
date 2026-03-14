@@ -269,3 +269,91 @@ body[data-theme="light"]{
 --text-light:#111827;
 --text-muted:#6b7280;
 }
+/* ---------------- */
+/* SERVER HERO BOX */
+/* ---------------- */
+
+.server-box{
+margin-top:25px;
+padding:25px;
+border-radius:14px;
+background:var(--bg-card);
+display:flex;
+flex-direction:column;
+gap:18px;
+align-items:center;
+box-shadow:0 0 25px rgba(0,0,0,0.4);
+animation:heroFloat 6s ease-in-out infinite;
+}
+
+@keyframes heroFloat{
+0%{transform:translateY(0)}
+50%{transform:translateY(-6px)}
+100%{transform:translateY(0)}
+}
+
+/* STATUS */
+
+.server-status{
+font-size:18px;
+display:flex;
+gap:8px;
+align-items:center;
+}
+
+#status-dot{
+width:10px;
+height:10px;
+border-radius:50%;
+background:#f00;
+box-shadow:0 0 10px #f00;
+}
+
+/* PLAYER COUNTER */
+
+.player-counter{
+font-size:26px;
+font-weight:700;
+color:var(--cyan);
+text-shadow:0 0 10px var(--cyan);
+}
+
+/* IP BOX */
+
+.ip-box{
+display:flex;
+gap:10px;
+background:#0b0d13;
+padding:10px 16px;
+border-radius:8px;
+align-items:center;
+border:1px solid rgba(255,255,255,0.08);
+}
+
+.server-ip{
+font-weight:600;
+letter-spacing:0.5px;
+}
+
+.copy-btn{
+background:var(--purple);
+border:none;
+padding:6px 12px;
+border-radius:6px;
+cursor:pointer;
+color:#fff;
+transition:0.3s;
+}
+
+.copy-btn:hover{
+box-shadow:0 0 10px var(--purple);
+transform:scale(1.05);
+}
+
+/* GLASS MODE SUPPORT */
+
+body.glass-mode .server-box{
+background:rgba(255,255,255,0.06);
+backdrop-filter:blur(20px);
+border:1px solid rgba(255,255,255,0.08);
+}
