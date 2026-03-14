@@ -4,41 +4,35 @@
 <meta charset="UTF-8">
 <title>HomieCraft SMP</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <meta name="description" content="HomieCraft SMP – Survival Multiplayer Server für Minecraft Java Edition.">
 
 <link rel="stylesheet" href="css/main.css">
-
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<!-- ------------------------------ -->
+<!-- BODY START -->
+<!-- Glas Mode aktivieren/deaktivieren: class="glass-mode" -->
+<!-- ------------------------------ -->
+<body class="glass-mode" data-theme="dark">
 
 <canvas id="particles"></canvas>
 <div class="bg-lines"></div>
-<body class="glass-mode">
 <div class="fog"></div>
 
 <header>
-
-<div class="logo-container" onclick="location.href='index.html'">
-<img src="images/logo.jpg" alt="Logo">
-
-<h1>
-<span class="cyan">HomieCraft</span>
-<span class="purple">SMP</span>
-</h1>
-
-</div>
-
-<div class="burger" onclick="toggleMenu()">☰</div>
-
+    <div class="logo-container" onclick="location.href='index.html'">
+        <img src="images/logo.jpg" alt="Logo">
+        <h1>
+            <span class="cyan">HomieCraft</span>
+            <span class="purple">SMP</span>
+        </h1>
+    </div>
+    <div class="burger" onclick="toggleMenu()">☰</div>
 </header>
 
 <nav id="sidebar">
-
 <ul>
-
 <li><a href="index.html#info">Info</a></li>
 <li><a href="index.html#features">Server Features</a></li>
 <li><a href="index.html#screenshots">Screenshots</a></li>
@@ -47,187 +41,104 @@
 <li><a href="index.html#commands">Commands</a></li>
 <li><a href="index.html#tipps">Tipps</a></li>
 <li><a href="index.html#faq">FAQ</a></li>
-
 <li><a href="regelwerk.html">Regelwerk</a></li>
 <li><a href="news.html">News</a></li>
 <li><a href="raenge.html">Ränge</a></li>
 <li><a href="events.html">Events</a></li>
 <li><a href="bewerbung.html">Bewerbung</a></li>
-
 </ul>
-
 </nav>
 
 <div id="overlay" onclick="toggleMenu()"></div>
 
 <section class="hero">
-
 <h2 class="hero-title">
 Willkommen auf <span class="gradient-text">HomieCraft SMP</span>
 </h2>
 
-<p class="subtitle">
-Dein Abenteuer beginnt hier.
-</p>
+<p class="subtitle">Dein Abenteuer beginnt hier.</p>
 
 <div class="server-box">
-
-<div class="server-status">
-
-<span id="status-dot"></span>
-<span id="server-status">Lade Serverstatus...</span>
-
+    <div class="server-status">
+        <span id="status-dot"></span>
+        <span id="server-status">Lade Serverstatus...</span>
+    </div>
+    <div class="player-counter">
+        <span id="player-count">0</span>
+        <span class="player-max">/30 Spieler</span>
+    </div>
+    <div class="ip-box">
+        <span class="server-ip">homiecraft-smp.aternos.me</span>
+        <button onclick="copyIP()" class="copy-btn">COPY</button>
+    </div>
+    <div class="hero-buttons">
+        <button onclick="copyIP()" class="btn-primary">IP kopieren</button>
+        <a href="index.html#info" class="btn-secondary">Jetzt beitreten</a>
+    </div>
 </div>
-
-<div class="player-counter">
-
-<span id="player-count">0</span>
-<span class="player-max">/30 Spieler</span>
-
-</div>
-
-<div class="ip-box">
-
-<span class="server-ip">homiecraft-smp.aternos.me</span>
-
-<button onclick="copyIP()" class="copy-btn">
-COPY
-</button>
-
-</div>
-
-<div class="hero-buttons">
-
-<button onclick="copyIP()" class="btn-primary">
-IP kopieren
-</button>
-
-<a href="index.html#info" class="btn-secondary">
-Jetzt beitreten
-</a>
-
-</div>
-
-</div>
-
 </section>
 
 <section id="info" class="section">
-
 <h2>Server Informationen</h2>
-
 <div class="info-grid">
-
-<div class="card" id="status-card">
-Status: ...
-</div>
-
-<div class="card" id="players-card">
-Spieler: ...
-</div>
-
+<div class="card" id="status-card">Status: ...</div>
+<div class="card" id="players-card">Spieler: ...</div>
 <div class="card">
-
 Max Spieler: 30<br>
 Version: 1.20.1 - 1.21.11<br>
 Edition: Java<br>
 IP: homiecraft-smp.aternos.me
-
 </div>
-
 <div class="card">
-
 <p>Kein P2Win</p>
 <p>News findest du <a href="news.html">hier</a></p>
-
 </div>
-
 </div>
-
 </section>
 
 <section id="features" class="section">
-
 <h2>Server Features</h2>
-
 <div class="tips-grid">
-
 <div class="card">⚔️ Survival SMP</div>
 <div class="card">🌍 Random Teleport</div>
 <div class="card">🏠 /sethome & /home</div>
 <div class="card">💬 Private Nachrichten</div>
 <div class="card">🎉 Events</div>
-
-<div class="card coming">
-- <span style="color:#8B0000;">Coming Soon!</span>
+<div class="card coming">- <span style="color:#8B0000;">Coming Soon!</span></div>
 </div>
-
-</div>
-
 </section>
 
 <section id="screenshots" class="section">
-
 <h2>Server Screenshots</h2>
-
 <div class="screenshots">
-
 <img src="images/spawn.jpg">
 <img src="images/base.jpg">
 <img src="images/world.jpg">
-
 </div>
-
 </section>
 
 <section id="gamemodes" class="section">
-
 <h2>Spielmodi</h2>
-
 <div class="gamemode-grid">
-
 <div class="card active">SMP</div>
-
-<div class="card coming">
-- <span style="color:#8B0000;">Coming Soon!</span>
+<div class="card coming">- <span style="color:#8B0000;">Coming Soon!</span></div>
+<div class="card coming">- <span style="color:#8B0000;">Coming Soon!</span></div>
+<div class="card coming">- <span style="color:#8B0000;">Coming Soon!</span></div>
 </div>
-
-<div class="card coming">
-- <span style="color:#8B0000;">Coming Soon!</span>
-</div>
-
-<div class="card coming">
-- <span style="color:#8B0000;">Coming Soon!</span>
-</div>
-
-</div>
-
 </section>
 
 <section id="team" class="section">
-
 <h2>Unser Team</h2>
-
 <div class="team-grid" id="team-container"></div>
-
 </section>
 
 <section id="commands" class="section">
-
 <h2>Commands</h2>
-
 <div class="accordion">
-
 <div class="accordion-item">
-
-<div class="accordion-header">
-Spieler Commands
-</div>
-
+<div class="accordion-header">Spieler Commands</div>
 <div class="accordion-content">
-
 <ul>
-
 <li>/spawn</li>
 <li>/home</li>
 <li>/tpa</li>
@@ -235,90 +146,73 @@ Spieler Commands
 <li>/rtp</li>
 <li>/msg</li>
 <li>/help</li>
-
 </ul>
-
 </div>
-
 </div>
-
-<p>
-Weitere Infos zu den Commands von bestimmten Ränge sind auf der
-Ränge Seite. Klicke <a href="raenge.html">hier</a>.
-</p>
-
+<p>Weitere Infos zu den Commands von bestimmten Ränge sind auf der Ränge Seite. Klicke <a href="raenge.html">hier</a>.</p>
 </div>
-
 </section>
 
 <section id="tipps" class="section">
-
 <h2>Tipps & Tricks</h2>
-
 <div class="tips-grid">
-
 <div class="card">Nutze die Schutzzeit fürs farmen.</div>
 <div class="card">Baue deine Base gut versteckt.</div>
 <div class="card">Sichere deine Items regelmäßig.</div>
 <div class="card">Nutze /sethome sinnvoll.</div>
 <div class="card">Handle mit anderen Spielern.</div>
-
 </div>
-
 </section>
 
 <section id="faq" class="section">
-
 <h2>FAQ</h2>
-
 <div class="accordion">
-
 <div class="accordion-item">
-
-<div class="accordion-header">
-Wie trete ich bei?
+<div class="accordion-header">Wie trete ich bei?</div>
+<div class="accordion-content">Füge die IP in deiner Minecraft Java Edition hinzu.</div>
 </div>
-
-<div class="accordion-content">
-Füge die IP in deiner Minecraft Java Edition hinzu.
-</div>
-
-</div>
-
 <div class="accordion-item">
-
-<div class="accordion-header">
-Welche Version?
+<div class="accordion-header">Welche Version?</div>
+<div class="accordion-content">1.20.1 – 1.21.11</div>
 </div>
-
-<div class="accordion-content">
-1.20.1 – 1.21.11
 </div>
-
-</div>
-
-</div>
-
 </section>
 
 <footer>
-
 <div class="footer-content">
-
 <p>© 2026 HomieCraft SMP</p>
 <p>IP: homiecraft-smp.aternos.me</p>
 <p>Made with ❤️ for the Homies</p>
 <p class="dev">Developed and created by LucaMaximal</p>
-
 </div>
-
 </footer>
 
-<button id="scrollTop" onclick="scrollToTop()">
-↑
-</button>
+<!-- Scroll to top Button -->
+<button id="scrollTop" onclick="scrollToTop()">↑</button>
 
+<!-- ------------------------------ -->
+<!-- JS -->
+<!-- ------------------------------ -->
 <script src="js/main.js"></script>
+
+<!-- ------------------------------ -->
+<!-- LIGHT / DARK MODE SWITCH -->
+<!-- data-theme="dark" = Dark Mode, data-theme="light" = Light Mode -->
+<!-- class="glass-mode" = Glass Mode, entferne class für normal -->
+<!-- ------------------------------ -->
+<script>
+function toggleTheme() {
+    const body = document.body;
+    if (body.dataset.theme === "dark") {
+        body.dataset.theme = "light";
+    } else {
+        body.dataset.theme = "dark";
+    }
+}
+function toggleGlassMode() {
+    document.body.classList.toggle("glass-mode");
+}
+</script>
 
 </body>
 </html>
